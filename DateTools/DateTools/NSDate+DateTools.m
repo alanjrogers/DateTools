@@ -194,6 +194,13 @@ static NSCalendar *implicitCalendar = nil;
     }
 }
 
+- (NSString *)localizedStringForKey:(NSString *)key {
+    NSString *bundlePath = [[[NSBundle bundleForClass:[DTError class]] resourcePath] stringByAppendingPathComponent:@"DateTools.bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+
+    return NSLocalizedStringFromTableInBundle(key, @"DateTools", bundle, nil);
+}
+
 - (NSString *)localizedStringFor:(DateAgoFormat)format valueType:(DateAgoValues)valueType value:(NSInteger)value {
     BOOL isShort = format == DateAgoShort;
     BOOL isNumericDate = format == DateAgoLongUsingNumericDates || format == DateAgoLongUsingNumericDatesAndTimes;
@@ -207,9 +214,9 @@ static NSCalendar *implicitCalendar = nil;
             } else if (value >= 2) {
                 return [self logicLocalizedStringFromFormat:@"%%d %@years ago" withValue:value];
             } else if (isNumericDate) {
-                return DateToolsLocalizedStrings(@"1 year ago");
+                return [self localizedStringForKey:@"1 year ago"];
             } else {
-                return DateToolsLocalizedStrings(@"Last year");
+                return [self localizedStringForKey:@"Last year"];
             }
         case MonthsAgo:
             if (isShort) {
@@ -217,9 +224,9 @@ static NSCalendar *implicitCalendar = nil;
             } else if (value >= 2) {
                 return [self logicLocalizedStringFromFormat:@"%%d %@months ago" withValue:value];
             } else if (isNumericDate) {
-                return DateToolsLocalizedStrings(@"1 month ago");
+                return [self localizedStringForKey:@"1 month ago"];
             } else {
-                return DateToolsLocalizedStrings(@"Last month");
+                return [self localizedStringForKey:@"Last month"];
             }
         case WeeksAgo:
             if (isShort) {
@@ -227,9 +234,9 @@ static NSCalendar *implicitCalendar = nil;
             } else if (value >= 2) {
                 return [self logicLocalizedStringFromFormat:@"%%d %@weeks ago" withValue:value];
             } else if (isNumericDate) {
-                return DateToolsLocalizedStrings(@"1 week ago");
+                return [self localizedStringForKey:@"1 week ago"];
             } else {
-                return DateToolsLocalizedStrings(@"Last week");
+                return [self localizedStringForKey:@"Last week"];
             }
         case DaysAgo:
             if (isShort) {
@@ -240,14 +247,14 @@ static NSCalendar *implicitCalendar = nil;
                     dayDateFormatter.dateFormat = @"EEE";
                     NSString *eee = [dayDateFormatter stringFromDate:self];
 
-                    return DateToolsLocalizedStrings(eee);
+                    return [self localizedStringForKey:eee];
                 }
 
                 return [self logicLocalizedStringFromFormat:@"%%d %@days ago" withValue:value];
             } else if (isNumericDate) {
-                return DateToolsLocalizedStrings(@"1 day ago");
+                return [self localizedStringForKey:@"1 day ago"];
             } else {
-                return DateToolsLocalizedStrings(@"Yesterday");
+                return [self localizedStringForKey:@"Yesterday"];
             }
         case HoursAgo:
             if (isShort) {
@@ -255,9 +262,9 @@ static NSCalendar *implicitCalendar = nil;
             } else if (value >= 2) {
                 return [self logicLocalizedStringFromFormat:@"%%d %@hours ago" withValue:value];
             } else if (isNumericTime) {
-                return DateToolsLocalizedStrings(@"1 hour ago");
+                return [self localizedStringForKey:@"1 hour ago"];
             } else {
-                return DateToolsLocalizedStrings(@"An hour ago");
+                return [self localizedStringForKey:@"An hour ago"];
             }
         case MinutesAgo:
             if (isShort) {
@@ -265,9 +272,9 @@ static NSCalendar *implicitCalendar = nil;
             } else if (value >= 2) {
                 return [self logicLocalizedStringFromFormat:@"%%d %@minutes ago" withValue:value];
             } else if (isNumericTime) {
-                return DateToolsLocalizedStrings(@"1 minute ago");
+                return [self localizedStringForKey:@"1 minute ago"];
             } else {
-                return DateToolsLocalizedStrings(@"A minute ago");
+                return [self localizedStringForKey:@"A minute ago"];
             }
         case SecondsAgo:
             if (isShort) {
@@ -275,9 +282,9 @@ static NSCalendar *implicitCalendar = nil;
             } else if (value >= 2) {
                 return [self logicLocalizedStringFromFormat:@"%%d %@seconds ago" withValue:value];
             } else if (isNumericTime) {
-                return DateToolsLocalizedStrings(@"1 second ago");
+                return [self localizedStringForKey:@"1 second ago"];
             } else {
-                return DateToolsLocalizedStrings(@"Just now");
+                return [self localizedStringForKey:@"Just now"];
             }
     }
     return nil;
@@ -285,7 +292,7 @@ static NSCalendar *implicitCalendar = nil;
 
 - (NSString *) logicLocalizedStringFromFormat:(NSString *)format withValue:(NSInteger)value{
     NSString * localeFormat = [NSString stringWithFormat:format, [self getLocaleFormatUnderscoresWithValue:value]];
-    return [NSString stringWithFormat:DateToolsLocalizedStrings(localeFormat), value];
+    return [NSString stringWithFormat:[self localizedStringForKey:localeFormat], value];
 }
 
 - (NSString *)getLocaleFormatUnderscoresWithValue:(double)value{

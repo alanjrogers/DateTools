@@ -36,8 +36,8 @@
 
 #pragma mark - Chain Existence Manipulation
 -(void)addTimePeriod:(DTTimePeriod *)period;
--(void)insertTimePeriod:(DTTimePeriod *)period atInedx:(NSInteger)index;
--(void)removeTimePeriodAtIndex:(NSInteger)index;
+-(void)insertTimePeriod:(DTTimePeriod *)period atInedx:(NSUInteger)index;
+-(void)removeTimePeriodAtIndex:(NSUInteger)index;
 -(void)removeLatestTimePeriod;
 -(void)removeEarliestTimePeriod;
 

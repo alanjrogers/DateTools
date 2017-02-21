@@ -60,13 +60,13 @@
  *  @param period DTTimePeriod - The time period to insert into the collection
  *  @param index  NSInteger - The index in the collection the time period is to be added at
  */
--(void)insertTimePeriod:(DTTimePeriod *)period atIndex:(NSInteger)index{
+-(void)insertTimePeriod:(DTTimePeriod *)period atIndex:(NSUInteger)index{
     if ([period class] != [DTTimePeriod class]) {
         [DTError throwBadTypeException:period expectedClass:[DTTimePeriod class]];
         return;
     }
     
-    if (index >= 0 && index < periods.count) {
+    if (index < periods.count) {
         [periods insertObject:period atIndex:index];
         
         //Set object's variables with updated array values
@@ -82,8 +82,8 @@
  *
  *  @param index NSInteger - The index in the collection the time period is to be removed from
  */
--(void)removeTimePeriodAtIndex:(NSInteger)index{
-    if (index >= 0 && index < periods.count) {
+-(void)removeTimePeriodAtIndex:(NSUInteger)index{
+    if (index < periods.count) {
         [periods removeObjectAtIndex:index];
         
         //Update the object variables

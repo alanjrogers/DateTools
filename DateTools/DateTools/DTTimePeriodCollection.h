@@ -30,8 +30,8 @@
 
 #pragma mark - Collection Manipulation
 -(void)addTimePeriod:(DTTimePeriod *)period;
--(void)insertTimePeriod:(DTTimePeriod *)period atIndex:(NSInteger)index;
--(void)removeTimePeriodAtIndex:(NSInteger)index;
+-(void)insertTimePeriod:(DTTimePeriod *)period atIndex:(NSUInteger)index;
+-(void)removeTimePeriodAtIndex:(NSUInteger)index;
 
 #pragma mark - Sorting
 -(void)sortByStartAscending;
