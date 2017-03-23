@@ -299,7 +299,7 @@ static NSCalendar *implicitCalendar = nil;
     NSString *localeCode = [[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0];
     
     // Russian (ru) and Ukrainian (uk)
-    if([localeCode isEqualToString:@"ru-RU"] || [localeCode isEqualToString:@"uk"]) {
+    if([localeCode isEqualToString:@"ru"] || [localeCode isEqualToString:@"uk"]) {
         int XY = (int)floor(value) % 100;
         int Y = (int)floor(value) % 10;
         
